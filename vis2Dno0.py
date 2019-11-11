@@ -5,8 +5,14 @@ import pygame
 from serialpart import *
 
 pygame.init()
-h_screen = 1280
-w_screen = 840
+h_screen = 1024
+w_screen = 1024
+
+screen = pygame.display.set_mode((w_screen, h_screen))
+
+backscreen = pygame.image.load("ressources/test/space1.png").convert()
+backscreen = pygame.transform.scale(backscreen, (w_screen, h_screen))
+fenetre = pygame.display.set_mode((w_screen, h_screen))
 
 done = False
 screen = pygame.display.set_mode((h_screen, w_screen))
@@ -30,7 +36,7 @@ y_m = int(0)
 list_to_meanX = []  # create a list in wich we'll put "num_val_mean" values before meaning it.
 list_to_meanY = []  # the same with y
 
-with open("../Calibration2D.txt", "r") as mycalfile:  # put it into a calibration_vars
+with open("Calibration2D.txt", "r") as mycalfile:  # put it into a calibration_vars
     text_of_limits = mycalfile.read()
     list_of_limits = text_of_limits.split()
     print(list_of_limits)
@@ -46,8 +52,8 @@ class Player(pygame.sprite.Sprite):
         # Pass in the color of the item, and its x and y position, width and height.
         # Set the background color and set it to be transparent
         self.origin = pygame.Surface([width, height])
-        self.origin = pygame.image.load("../ressources/Car_1_01.png").convert_alpha() #the name of the sprite
-        self.original = pygame.transform.scale(self.origin, (20, 40))
+        self.origin = pygame.image.load("ressources/test/spaceship.png").convert_alpha() #the name of the sprite
+        self.original = pygame.transform.scale(self.origin, (40, 80))
 
         # import list of limits
         self.list_of_limits = list_of_limits
@@ -80,7 +86,7 @@ class Player(pygame.sprite.Sprite):
         angledeg = ((180) / math.pi) * anglerad #calcul of angle for sprite rotation
         print("en degrès : ",angledeg," et en radians : ", anglerad)
 
-        #self.image = pygame.transform.rotate(self.original, angledeg) #dehach to rotate the sprite
+        self.image = pygame.transform.rotate(self.original, angledeg) #dehach to rotate the sprite
 
 
         if self.puissance > 0.3:
@@ -120,8 +126,10 @@ while not done:
         list_to_meanX = []  # putting the xlist to 0
         list_to_meanY = []  # putting the ylist to 0
 
-    screen.fill((0, 0, 0))  # fullfillment of the screen with a color
 
+
+    screen.fill((0, 0, 0))  # fullfillment of the screen with a color
+    fenetre.blit(backscreen, (0, 0))
     player.update(x_m, y_m)
     all_sprites.draw(screen)
 

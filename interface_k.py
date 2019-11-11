@@ -106,13 +106,16 @@ class LayoutGeneral(BoxLayout):
 
         button1Calibration1D = Button(text="Calibration 1D", font_size=40, size_hint=(0.98, 0.4))
         button1Calibration1D.bind(on_release=self.button1)
-        button2Calibration2D = Button(text="Calibration 2D", font_size=40, size_hint=(0.98, 0.4), background_color=[1,1,1,0.3])
+        button2Calibration2D = Button(text="Calibration 2D", font_size=40, size_hint=(0.98, 0.4))
+        button2Calibration2D.bind(on_release=self.button2)
         buttonboxPyou=BoxLayout(orientation='horizontal',spacing= 10, padding=10)
         button3Pyou = Button(text="Pyou", font_size=40, size_hint=(0.98, 1))
         button3Pyou.bind(on_release=self.button3)
         intrabuttonboxpyou=BoxLayout(orientation='vertical',spacing= 10, padding=10)
         button4CatchyP = Button(text="CatchY", font_size=40, size_hint=(0.98, 0.4))
         button4CatchyP.bind(on_release=self.button4)
+        button5essais2D = Button(text="App 2D (test)", font_size=40, size_hint=(0.98, 0.4))
+        button5essais2D.bind(on_release=self.button5)
         sllv=Slider(id="lv",min="1",max="3",value="3",value_track=True,step=1)
         sllv.bind(value=self.mavariableduslider1)
         self.lbsl=Label(text="3 niveaux",font_size=20)
@@ -133,6 +136,7 @@ class LayoutGeneral(BoxLayout):
         intrabuttonboxpyou.add_widget(sl2scorep)
         intrabuttonboxpyou.add_widget(self.lbsl2)
         intravbox.add_widget(button4CatchyP)
+        intravbox.add_widget(button5essais2D)
         intravbox.add_widget(textbas)
 
         #texte sur le côté droit
@@ -152,12 +156,20 @@ class LayoutGeneral(BoxLayout):
         cmd = 'python Calibration1D.py'
         os.system(cmd)
 
+    def button2(self,*args):
+        cmd = 'python Calibration2D.py'
+        os.system(cmd)
+
     def button3(self,*args):
         cmd = 'python Pyou.py'
         os.system(cmd)
 
     def button4(self,*args):
         cmd = 'python CatchyP.py'
+        os.system(cmd)
+
+    def button5(self,*args):
+        cmd = 'python vis2Dno0.py'
         os.system(cmd)
 
     def mavariableduslider1(self,*args):
