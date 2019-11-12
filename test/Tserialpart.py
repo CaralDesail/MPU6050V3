@@ -5,17 +5,14 @@ After, it contain a function to "format" the data with new arduino code and seri
 import serial
 import re
 
-ser = serial.Serial('COM4')  # open serial port
+ser = serial.Serial('COM6')  # open serial port
 ser.baudrate = 57600 #  don't works with any other values ie 9600
 
 
 
-def simpleard_to_xyz_list(): # simple reading of arduino informations : the purpose is to return a x , y , z list
+def simpleard_to_xyz_list(): # simple reading of arduino informations from
     # reading part
     info_serial_tr=ser.readline() # basis reading from serial port
     liste_acc_val= re.findall("(.[0-9]+)",str(info_serial_tr)) # we simplify the sentence, and extract data in a list
 
-
-
-    if len(liste_acc_val) == 3 :
-        return liste_acc_val
+    return liste_acc_val

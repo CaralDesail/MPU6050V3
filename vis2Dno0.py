@@ -3,6 +3,7 @@ from statistics import mean
 import math
 import pygame
 from serialpart import *
+import serialpart
 
 pygame.init()
 h_screen = 1024
@@ -109,8 +110,7 @@ while not done:
             done = True
 
     # reading part
-    info_serial_tr = ser.readline()  # basis reading from serial port
-    liste_acc_val = re.findall("(.[0-9]+)", str(info_serial_tr))  # we simplify the sentence, and extract data in a list
+    liste_acc_val=serialpart.simpleard_to_xyz_list()
 
     if len(liste_acc_val) == 3:
         # meaning part

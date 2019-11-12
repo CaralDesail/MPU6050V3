@@ -4,8 +4,7 @@ This is a part of the MPU 6050 Project
 in 4 steps. It will put the information in a current used file (Calibration1D.txt), and an archive one (CalArch.txt).
 Alain Carrot
 """
-import serial
-import re
+import serialpart
 from statistics import mean
 import pygame
 import sys
@@ -59,8 +58,8 @@ done4frame = False #condition of while 4
 #list of differents values that this program will claim.
 axe=int() #the ax value : x=0, y=1
 valz=int() # the value of valz (z for zero)
-nmin=int(0) # the value of minimum of x or y
-nmax=int(0) # the value of maximum of x or y
+nmin=int() # the value of minimum of x or y
+nmax=int() # the value of maximum of x or y
 
 color1 = (0, 128, 255) #blue
 color2 = (0, 200, 255) #clear blue
@@ -78,8 +77,8 @@ texte2frame4 = police.render("puis appuyez sur Entrer", True, pygame.Color("#000
 
 
 # initial positions of current x y
-x_m=int(0)
-y_m=int(0)
+x_m=int()
+y_m=int()
 list_to_meanX=[] #create a list in wich we'll put "num_val_mean" values before meaning it.
 list_to_meanY=[] #the same with y
 
@@ -107,8 +106,7 @@ while not done2frame :
         done2frame = True
 
     # reading part
-    info_serial_tr = ser.readline()  # basis reading from serial port
-    liste_acc_val = re.findall("(.[0-9]+)", str(info_serial_tr))  # we simplify the sentence, and extract data in a list
+    liste_acc_val=serialpart.simpleard_to_xyz_list()
 
     if len(liste_acc_val) == 3:
         # meaning part
@@ -154,11 +152,12 @@ while not done3frame: # third frame that will allow to set a valz (zero value ) 
         if axe==1:valz=y_m
 
         print("valeur moyenne selectionnée, valz vaut : ", valz)
+        nmin =valz
+        nmax= valz
         done3frame = True
 
     # reading part
-    info_serial_tr = ser.readline()  # basis reading from serial port
-    liste_acc_val = re.findall("(.[0-9]+)", str(info_serial_tr))  # we simplify the sentence, and extract data in a list
+    liste_acc_val=serialpart.simpleard_to_xyz_list()
 
     if len(liste_acc_val) == 3:
         # meaning part
@@ -208,8 +207,7 @@ while not done4frame:
         done4frame = True
 
     # reading part
-    info_serial_tr = ser.readline()  # basis reading from serial port
-    liste_acc_val = re.findall("(.[0-9]+)", str(info_serial_tr))  # we simplify the sentence, and extract data in a list
+    liste_acc_val=serialpart.simpleard_to_xyz_list()
 
     if len(liste_acc_val) == 3:
         # meaning part

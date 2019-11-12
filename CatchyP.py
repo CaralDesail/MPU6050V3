@@ -1,5 +1,4 @@
-import serial
-import re
+import serialpart
 from statistics import mean
 from random import *
 import pygame
@@ -147,8 +146,7 @@ while not done:  # main loop
             done = True
 
     # reading part
-    info_serial_tr = ser.readline()  # basis reading from serial port
-    liste_acc_val = re.findall("(.[0-9]+)", str(info_serial_tr))  # we simplify the sentence, and extract data in a list
+    liste_acc_val=serialpart.simpleard_to_xyz_list()
     if len(liste_acc_val) == 3:  # check is lengt of recorded values on one line is 3 : x, y, and z.
         # If not (because not complete) this if avoid a bug and dont use it...
 

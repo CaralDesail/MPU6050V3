@@ -4,12 +4,13 @@ This is a part of the MPU 6050 Project
 in 4 steps. It will put the information in a current used file (Calibration1D.txt), and an archive one (CalArch.txt).
 Alain Carrot
 """
-import serial
+import serialpart
 import re
 from statistics import mean
 import pygame
 import sys
 import datetime
+
 
 def com_n_quit():
     for event in pygame.event.get():  # common command that asks for quitting system when user clics on QUIT icon.
@@ -103,8 +104,7 @@ while not done2frame :
         done2frame = True
 
     # reading part
-    info_serial_tr = ser.readline()  # basis reading from serial port
-    liste_acc_val = re.findall("(.[0-9]+)", str(info_serial_tr))  # we simplify the sentence, and extract data in a list
+    liste_acc_val=serialpart.simpleard_to_xyz_list()
 
     if len(liste_acc_val) == 3:
         # meaning part
@@ -150,11 +150,14 @@ while not done3frame: # third frame that will allow to set a valXz and valYz(zer
         valYz=y_m
 
         print("valeur moyenne selectionnée, valXz et valYz valent : ", valXz, valYz)
+        nminX = valXz
+        nmaxX = valXz
+        nmaxY = valYz
+        nminY = valYz
         done3frame = True
 
     # reading part
-    info_serial_tr = ser.readline()  # basis reading from serial port
-    liste_acc_val = re.findall("(.[0-9]+)", str(info_serial_tr))  # we simplify the sentence, and extract data in a list
+    liste_acc_val=serialpart.simpleard_to_xyz_list()
 
     if len(liste_acc_val) == 3:
         # meaning part
@@ -204,8 +207,7 @@ while not done4frame:
         done4frame = True
 
     # reading part
-    info_serial_tr = ser.readline()  # basis reading from serial port
-    liste_acc_val = re.findall("(.[0-9]+)", str(info_serial_tr))  # we simplify the sentence, and extract data in a list
+    liste_acc_val=serialpart.simpleard_to_xyz_list()
 
     if len(liste_acc_val) == 3:
         # meaning part
