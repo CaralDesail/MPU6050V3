@@ -35,8 +35,8 @@ dico = {}
 
 """ about the MPU6050 fonctionnement"""
 from serialpart import * #will import serialpart.py (with port name and baudrate)
-num_val_mean = 10  # value of softener function
-nb_of_px = 10  # speed of the controlled object (in px/while )
+num_val_mean = 5  # value of softener function
+nb_of_px = 20  # speed of the controlled object (in px/while )
 diff_factor = 1.0  # a factor that will change the values of nmin/nmax (used to change difficulty)
 
 clock = pygame.time.Clock()

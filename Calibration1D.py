@@ -49,7 +49,7 @@ while not done1frame : # First Frame
 
 from serialpart import * #will import serialpart.py (with port name and baudrate)
 
-num_val_mean = 5 # value of the meaning of x, or y. Less will be more quick, more will me more smooth.
+num_val_mean = 2 # value of the meaning of x, or y. Less will be more quick, more will me more smooth.
 
 done2frame = False #condition of while 2
 done3frame = False #condition of while 3

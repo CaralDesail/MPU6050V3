@@ -6,16 +6,26 @@ import serial
 import re
 
 ser = serial.Serial('COM4')  # open serial port
-ser.baudrate = 57600 #  don't works with any other values ie 9600
+ser.baudrate = 9600
 
-
+cache_serial = str()
 
 def simpleard_to_xyz_list(): # simple reading of arduino informations : the purpose is to return a x , y , z list
+
     # reading part
-    info_serial_tr=ser.readline() # basis reading from serial port
-    liste_acc_val= re.findall("(.[0-9]+)",str(info_serial_tr)) # we simplify the sentence, and extract data in a list
+    info_serial_tr = ser.readline()  # basis reading from serial port
 
+    #define a if condition that takes the previous serial infos is non object
+    if info_serial_tr==None:
+        global cache_serial
+        info_serial_tr = cache_serial
 
+    cache_serial=info_serial_tr
+    liste_acc_val_temp = re.findall('([-0-9][0-9]+)',
+                                    str(info_serial_tr))  # we simplify the sentence, and extract data in a list
+    liste_acc_val = liste_acc_val_temp[0:3]
+
+    print(info_serial_tr,cache_serial)
 
     if len(liste_acc_val) == 3 :
         return liste_acc_val

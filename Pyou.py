@@ -23,8 +23,8 @@ done = False
 rectScreen = screen.get_rect()
 
 
-num_val_mean = 7 # value of softener function
-nb_of_px =10 # speed of the object (in px/while )
+num_val_mean = 3 # value of softener function
+nb_of_px =20 # speed of the object (in px/while )
 diff_factor=1.0 #a factor that will change the values of nmin/nmax
 seed_taken=bool(False)
 score1=False
@@ -67,7 +67,7 @@ nmin=int(list_of_cal1D[2])*diff_factor #minimum recorded value time difficultyfa
 nmax=int(list_of_cal1D[3])*diff_factor #maximum recorded value time difficultyfactor
 
 
-with open("ParamsPyou", "r") as myuser:  # get the params informations to count the number of moves to succed.
+with open("ParamsPyou", "r") as myuser:  # get the params informations to count the number of moves to succed the game.
     listtoreadParams = myuser.read()
     list_of_params = listtoreadParams.split()
     moves_to_reach=int(list_of_params[0])*int(list_of_params[1]) # moves_to_reach is this number ...
