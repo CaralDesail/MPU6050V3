@@ -5,8 +5,8 @@ After, it contain a function to "format" the data with new arduino code and seri
 import serial
 import re
 
-ser = serial.Serial('COM4')  # open serial port
-ser.baudrate = 9600
+ser = serial.Serial('COM3')  # open serial port
+ser.baudrate = 38400
 
 cache_serial = str()
 
